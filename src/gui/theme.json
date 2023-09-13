@@ -1,0 +1,16 @@
+ {
+     "#speed-label":
+     {
+         "colours":
+         {
+             "normal_text": "#000000"
+         }
+     },
+     "#button-label":
+     {
+         "colours":
+         {
+             "normal_text": "#FFFFFF"
+         }
+     }
+ }
