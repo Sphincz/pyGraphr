@@ -32,3 +32,6 @@ class Graph:
             # Load start and end nodes
             self.start_node = self.nodes[data["start"]]
             self.end_node = self.nodes[data["end"]]
+
+    def get_neighbors(self, node):
+        return list(self.nx_graph.neighbors(node))

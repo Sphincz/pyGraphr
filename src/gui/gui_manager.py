@@ -4,6 +4,7 @@ import pygame_gui
 from pygame_gui.core import ObjectID
 
 from algorithms import Algorithms
+from gui.color_legend import ColorLegend
 from node import Node
 from search_visualizer import SearchVisualizer
 from utils.colors import Color
@@ -13,22 +14,25 @@ from utils.hierarchy_network import hierarchy_pos
 class GUIManager:
     def __init__(self, graph):
         self.found_path = None
-        self.exploration_order = None
+        self.visit_order = None
         self.graph = graph
         self.animation_completed = False
 
-        self.algorithms = Algorithms(self.graph)
-        self.visualizer = SearchVisualizer(self.graph)
-
+        # Ajustar se necessario
+        self.window_size = (1280, 720)
+        self.graph_margin = 150
+        self.animation_speed = 50
+        self.legend_margin_left = 100
         self.node_radius = 20
         self.background_color = Color.WHITE.value
         self.node_color = Color.BLUE.value
 
-        self.window_size = (1280, 720)  # Ajustar se necessario
-        self.graph_margin = 200  # Ajustar conforme o grafo
-        self.animation_speed = 50
-        self.screen = pygame.display.set_mode(self.window_size)
+        # Inicializar motor
+        self.algorithms = Algorithms(self.graph)
+        self.visualizer = SearchVisualizer(self.graph)
 
+        self.screen = pygame.display.set_mode(self.window_size)
+        self.color_legend = ColorLegend(self.legend_margin_left, self.window_size[1] - 40)
         self.manager = pygame_gui.UIManager(self.window_size, './gui/theme.json')
         self.nodes = {name: Node(name, pos) for name, pos in hierarchy_pos(self.graph.nx_graph).items()}
 
@@ -109,15 +113,15 @@ class GUIManager:
 
                 if event.ui_element == self.begin_button:
                     selected_algorithm = self.algorithm_dropdown.selected_option
-                    self.exploration_order, self.found_path = self.algorithms.perform_search(selected_algorithm,
+                    self.visit_order, self.found_path = self.algorithms.perform_search(selected_algorithm,
                                                                                              self.graph.start_node,
                                                                                              self.graph.end_node)
 
                 elif event.ui_element == self.reset_button:
                     self.visualizer.clear_visited_nodes()  # Clear visited nodes
-                    if hasattr(self, 'exploration_order'):
-                        self.exploration_order = []  # Reset exploration_order
-                        self.animation_completed = False # Reset animation completed flag
+                    if hasattr(self, 'visit_order'):
+                        self.visit_order = []  # Reset visit_order
+                        self.animation_completed = False  # Reset animation completed flag
 
                 elif event.ui_element == self.exit_button:
                     pygame.quit()
@@ -134,14 +138,14 @@ class GUIManager:
     def update(self, time_delta):
         self.manager.update(time_delta)
 
-        # Logic to move nodes to exploration_order for animation
-        if hasattr(self, 'exploration_order') and self.exploration_order:
+        # Logic to move nodes to visit_order for animation
+        if hasattr(self, 'visit_order') and self.visit_order:
             pygame.time.wait(1000 - (self.animation_speed * 10))
-            next_node_name = self.exploration_order.pop(0)
+            next_node_name = self.visit_order.pop(0)
             self.visualizer.add_visited_node(next_node_name)
             self.nodes[next_node_name].set_order(len(self.visualizer.visited_nodes) + 1)
 
-            if len(self.exploration_order) == 0:
+            if len(self.visit_order) == 0:
                 self.animation_completed = True
 
     def draw(self):
@@ -189,6 +193,7 @@ class GUIManager:
 
         # Repaint and update UI elements after graph was drawn
         self.manager.draw_ui(self.screen)
+        self.color_legend.draw(self.screen)
         pygame.display.flip()
 
     def create_nodes(self):

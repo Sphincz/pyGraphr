@@ -9,7 +9,7 @@ class PyGraphr:
         pygame.display.set_caption('pyGraphr - A Python Graph Traversal Visualizer')
 
         # Load graph data
-        self.graph_path = "./graphs/graph_dict.txt"
+        self.graph_path = "graphs/graph.txt"
         self.graph = Graph(self.graph_path)
 
         # Initialize the GUI Manager

@@ -9,13 +9,13 @@ class Node:
         self.name = str(name)
         self.pos = pos
         self.color = Color.BLUE.value
-        self.exploration_order = None
+        self.visit_order = None
 
     def set_color(self, color):
         self.color = color
 
     def set_order(self, order):
-        self.exploration_order = order
+        self.visit_order = order
 
     def draw(self, screen):
         # Anti-aliased cirle nodes
@@ -28,9 +28,9 @@ class Node:
         screen.blit(text, (self.pos[0] - 5, self.pos[1] - 10))
 
         # Draw order if it exists
-        if self.exploration_order is not None:
+        if self.visit_order is not None:
             font = pygame.font.SysFont('Arial', 15)
-            order_text = font.render(str(self.exploration_order), True, Color.WHITE.value)
+            order_text = font.render(str(self.visit_order), True, Color.WHITE.value)
             screen.blit(order_text, (self.pos[0] + self.radius, self.pos[1] - 10))
 
     def __str__(self):
