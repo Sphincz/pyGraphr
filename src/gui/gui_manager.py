@@ -113,11 +113,13 @@ class GUIManager:
 
                 if event.ui_element == self.begin_button:
                     selected_algorithm = self.algorithm_dropdown.selected_option
+                    print("[ALGO] Begin search for search algorithm:", selected_algorithm)
                     self.visit_order, self.found_path = self.algorithms.perform_search(selected_algorithm,
                                                                                              self.graph.start_node,
                                                                                              self.graph.end_node)
 
                 elif event.ui_element == self.reset_button:
+                    print("[ALGO] Graph search reset!")
                     self.visualizer.clear_visited_nodes()  # Clear visited nodes
                     if hasattr(self, 'visit_order'):
                         self.visit_order = []  # Reset visit_order
@@ -125,6 +127,7 @@ class GUIManager:
 
                 elif event.ui_element == self.exit_button:
                     pygame.quit()
+                    print("[ROOT] pyGraphr exited.")
                     exit()
 
             # For the speed slider

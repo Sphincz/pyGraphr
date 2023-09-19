@@ -13,6 +13,7 @@ class Graph:
         self._load_from_file(filename)
 
     def _load_from_file(self, filename):
+        print("[INFO] Loading graph file...")
         with open(filename, 'r') as file:
             data = json.load(file)
 
@@ -32,6 +33,7 @@ class Graph:
             # Load start and end nodes
             self.start_node = self.nodes[data["start"]]
             self.end_node = self.nodes[data["end"]]
+            print("[INFO] Graph file loaded!")
 
     def get_neighbors(self, node):
         return list(self.nx_graph.neighbors(node))

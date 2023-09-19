@@ -4,6 +4,11 @@
 Código-base para a Unidade Curricular (UC)
 de Inteligência Artificial do Iscte-Sintra.
 
+### Download do projeto
+Para poderem fazer o _download_ do projeto, deverão seguir as instruções presentes na documentação do código-base. 
+Após garantirem que o código-base já se encontra nas vossas máquinas, procedam para o
+próximo passo.
+
 ### Configuração inicial
 Têm de garantir que possuem os seguintes requisitos para poderem importar corretamente
 o projeto-base para o vosso IDE (Visual Studio Code / PyCharm):
