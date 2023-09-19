@@ -5,6 +5,7 @@ from graph import Graph
 
 class PyGraphr:
     def __init__(self):
+        print("[ROOT] Starting pyGame...")
         pygame.init()
         pygame.display.set_caption('pyGraphr - A Python Graph Traversal Visualizer')
 
@@ -13,7 +14,9 @@ class PyGraphr:
         self.graph = Graph(self.graph_path)
 
         # Initialize the GUI Manager
+        print("[GUI] Starting GUI...")
         self.gui_manager = GUIManager(self.graph)
+        print("[GUI] GUI started successfully!")
 
     def run(self):
         clock = pygame.time.Clock()
