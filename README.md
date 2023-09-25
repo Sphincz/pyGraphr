@@ -25,5 +25,5 @@ Depois de terminarem a configuração inicial, prossigam para mais uns comandos 
 Para garantir que o projeto base inicia sem problemas, devem importar o projeto, e na console 
 (garantir que estão localizados na **pasta principal - pyGraphr**)
 executem os seguintes comandos:
-1. ``python install -r requirements.txt``
+1. ``pip install -r requirements.txt``
 2. ``python -m pip install -e .``
