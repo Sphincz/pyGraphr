@@ -18,11 +18,17 @@ class Graph:
             data = json.load(file)
 
             # Load nodes and edges
-            for node, neighbors in data.items():
+            for node, data_entry in data.items():
                 if node not in ["start", "end"]:
+                    neighbors = data_entry[:-1]
+                    heuristic = data_entry[-1]
+
                     if node not in self.nodes:
                         # Create a new Node object and store it in the nodes dictionary
-                        self.nodes[node] = Node(node)
+                        self.nodes[node] = Node(node, heuristic=heuristic)
+                    else:
+                        # Update the heuristic if the node already exists (it was previously added as a neighbor)
+                        self.nodes[node].heuristic = heuristic
                     self.nx_graph.add_node(self.nodes[node])
 
                     for neighbor in neighbors:

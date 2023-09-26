@@ -5,6 +5,7 @@ from pygame_gui.core import ObjectID
 
 from algorithms import Algorithms
 from gui.color_legend import ColorLegend
+from gui.heuristics_table import HeuristicsTable
 from node import Node
 from search_visualizer import SearchVisualizer
 from utils.colors import Color
@@ -23,6 +24,8 @@ class GUIManager:
         self.graph_margin = 150
         self.animation_speed = 50
         self.legend_margin_left = 100
+        self.heuristics_margin_left = 10
+        self.heuristics_margin_top = 75
         self.node_radius = 20
         self.background_color = Color.WHITE.value
         self.node_color = Color.BLUE.value
@@ -30,6 +33,7 @@ class GUIManager:
         # Inicializar motor
         self.algorithms = Algorithms(self.graph)
         self.visualizer = SearchVisualizer(self.graph)
+        self.heuristics_table = HeuristicsTable((self.heuristics_margin_left, self.heuristics_margin_top), graph)
 
         self.screen = pygame.display.set_mode(self.window_size)
         self.color_legend = ColorLegend(self.legend_margin_left, self.window_size[1] - 40)
@@ -104,6 +108,14 @@ class GUIManager:
             object_id=ObjectID(class_id=None, object_id='#button-label'),
         )
 
+        # Info toggle heuristics table
+        self.heuristics_table_info_label = pygame_gui.elements.UILabel(
+            relative_rect=pygame.Rect((5, 50), (300, 30)),
+            text="Click 'H' key to toggle heuristics table",
+            manager=self.manager,
+            object_id=ObjectID(class_id=None, object_id='#normal-label')
+        )
+
         self.create_nodes()
 
     def process_events(self, event):
@@ -115,8 +127,8 @@ class GUIManager:
                     selected_algorithm = self.algorithm_dropdown.selected_option
                     print("[ALGO] Begin search for search algorithm:", selected_algorithm)
                     self.visit_order, self.found_path = self.algorithms.perform_search(selected_algorithm,
-                                                                                             self.graph.start_node,
-                                                                                             self.graph.end_node)
+                                                                                       self.graph.start_node,
+                                                                                       self.graph.end_node)
 
                 elif event.ui_element == self.reset_button:
                     print("[ALGO] Graph search reset!")
@@ -135,6 +147,11 @@ class GUIManager:
                 if event.ui_element == self.speed_slider:
                     self.animation_speed = int(self.speed_slider.get_current_value())
                     self.slider_value_label.set_text(str(self.animation_speed))
+
+        # For the heuristics table
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_h:  # Press 'h' to toggle heuristics table
+                self.heuristics_table.show = not self.heuristics_table.show
 
         self.manager.process_events(event)
 
@@ -197,6 +214,7 @@ class GUIManager:
         # Repaint and update UI elements after graph was drawn
         self.manager.draw_ui(self.screen)
         self.color_legend.draw(self.screen)
+        self.heuristics_table.draw(self.screen)
         pygame.display.flip()
 
     def create_nodes(self):

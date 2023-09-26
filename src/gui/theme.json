@@ -6,6 +6,17 @@
              "normal_text": "#000000"
          }
      },
+    "#normal-label":
+     {
+         "colours":
+         {
+             "normal_text": "#000000"
+         },
+          "font":
+          {
+              "size": 12
+          }
+     },
      "#button-label":
      {
          "colours":
