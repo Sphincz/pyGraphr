@@ -194,6 +194,25 @@ class GUIManager:
             pygame.draw.line(self.screen, Color.BLACK.value, p2_arrow, left, 2)
             pygame.draw.line(self.screen, Color.BLACK.value, p2_arrow, right, 2)
 
+            # Compute midpoint for rendering edge weight
+            midpoint = (p1 + p2) / 2
+
+            # Get the edge's weight
+            edge_weight = self.graph.nx_graph[edge[0]][edge[1]].get('weight', 0)
+
+            # Render the edge weight at the midpoint
+            font = pygame.font.SysFont("Tahoma", 16)
+            weight_text = font.render(str(edge_weight), True, Color.BLACK.value, bgcolor=Color.WHITE.value)
+            # Create a new surface with dimensions expanded by padding
+            bg_padding = 3
+            padded_surface = pygame.Surface((weight_text.get_width() + 2 * bg_padding,
+                                             weight_text.get_height() + 2 * bg_padding))
+            padded_surface.fill(Color.WHITE.value)
+            padded_surface.blit(weight_text, (bg_padding, bg_padding))
+            # Compute the midpoint for the padded surface
+            text_rect = padded_surface.get_rect(center=(midpoint[0], midpoint[1]))
+            self.screen.blit(padded_surface, text_rect.topleft)
+
             # Drawing nodes
             for node_name, node in self.nodes.items():
                 node.color = self.node_color
