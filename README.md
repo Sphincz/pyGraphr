@@ -34,7 +34,7 @@ necessitam do mesmo para que o pyGraphr funcione corretamente, deverão
 criar o ficheiro ``algorithms.py`` na pasta ``pyGraphr/src`` e copiar
 para lá o seguinte código:
 
-```
+```python
 class Algorithms:
     def __init__(self, graph):
         self.found_path = []
