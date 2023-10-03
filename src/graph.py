@@ -31,15 +31,26 @@ class Graph:
                         self.nodes[node].heuristic = heuristic
                     self.nx_graph.add_node(self.nodes[node])
 
-                    for neighbor in neighbors:
+                    for connection in neighbors:
+                        neighbor, weight = connection[0], connection[1]
                         if neighbor not in self.nodes:
                             self.nodes[neighbor] = Node(neighbor)
-                        self.nx_graph.add_edge(self.nodes[node], self.nodes[neighbor])
+                        self.nx_graph.add_edge(self.nodes[node], self.nodes[neighbor], weight=weight)
 
             # Load start and end nodes
             self.start_node = self.nodes[data["start"]]
             self.end_node = self.nodes[data["end"]]
+
             print("[INFO] Graph file loaded!")
 
     def get_neighbors(self, node):
+        """
+        Returns a list of neighbors of a given node.
+        """
         return list(self.nx_graph.neighbors(node))
+
+    def get_cost(self, node1, node2):
+        """
+        Returns the cost (weight) between two given nodes.
+        """
+        return self.nx_graph[node1][node2]['weight']
