@@ -7,7 +7,7 @@ class PyGraphr:
     def __init__(self):
         print("[ROOT] Starting pyGame...")
         pygame.init()
-        pygame.display.set_caption('pyGraphr v1.1 - A Python Graph Traversal Visualizer')
+        pygame.display.set_caption('pyGraphr v1.2 - A Python Graph Traversal Visualizer')
 
         # Load graph data
         self.graph_path = "graphs/graph.txt"
