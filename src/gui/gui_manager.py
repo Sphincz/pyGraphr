@@ -202,7 +202,7 @@ class GUIManager:
 
             # Render the edge weight at the midpoint
             font = pygame.font.SysFont("Tahoma", 16)
-            weight_text = font.render(str(edge_weight), True, Color.BLACK.value, bgcolor=Color.WHITE.value)
+            weight_text = font.render(str(edge_weight), True, Color.BLACK.value)
             # Create a new surface with dimensions expanded by padding
             bg_padding = 3
             padded_surface = pygame.Surface((weight_text.get_width() + 2 * bg_padding,
