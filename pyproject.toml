@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pyGraphr"
 description = "A Python Graph Traversal Visualizer for applying search algorithms."
-version = "0.1.0-BETA"
+version = "1.2-BETA"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 readme = "README.md"
