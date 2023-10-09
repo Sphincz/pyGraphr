@@ -1,3 +1,4 @@
+import numpy as np
 import pygame
 import pygame_gui
 from pygame_gui.core import ObjectID
