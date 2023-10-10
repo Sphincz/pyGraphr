@@ -19,10 +19,10 @@ executem algumas operações:
    2. Criação do ambiente virtual (**recomendado**): ``conda create -n NOME_ESCOLHIDO python=3.11``;
    3. Configurar interpretador no VS Code ou PyCharm (se fizeram todos os passos corretamente, deverá aparecer nos vossos IDEs o novo ambiente virtual que criaram).
 
-Depois de terminarem a configuração inicial, prossigam para mais uns comandos adicionais:
+Após terminarem a configuração inicial, prossigam para mais uns comandos adicionais:
 
 ### Comandos iniciais:
-Para garantir que o projeto base inicia sem problemas, devem importar o projeto, e na console 
+Para garantir que o projeto base inicia sem problemas, devem importar o projeto, e no terminal 
 (garantir que estão localizados na **pasta principal - pyGraphr**)
 executem os seguintes comandos:
 1. ``pip install -r requirements.txt``
