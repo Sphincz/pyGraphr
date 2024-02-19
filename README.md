@@ -28,10 +28,9 @@ executem os seguintes comandos:
 1. ``pip install -r requirements.txt``
 2. ``python -m pip install -e .``
 
-### Ficheiro original `algorithms.py`:
-Como houve necessidade de remover o ``algorithms.py`` do código-base, e como
-necessitam do mesmo para que o pyGraphr funcione corretamente, deverão
-criar o ficheiro ``algorithms.py`` na pasta ``pyGraphr/src`` e copiar
+### Ficheiro `algorithms.py`:
+Para que o pyGraphr possa funcionar corretamente, deverão criar o 
+ficheiro ``algorithms.py`` na pasta ``pyGraphr/src`` e copiar
 para lá o seguinte código:
 
 ```python
