@@ -17,5 +17,5 @@ dependencies = [
     "networkx >= 3.1",
 ]
 
-[project.scripts] # TO-DO: Add entry point for the CLI
-solve = "pygraphr.__main__:main"
+[project.scripts]
+pygraphr = "main:main"
