@@ -1,7 +1,7 @@
 import pygame
 from gui.gui_manager import GUIManager
 from graph import Graph
-
+import os
 
 class PyGraphr:
     def __init__(self):
@@ -37,6 +37,10 @@ class PyGraphr:
             pygame.display.flip()
 
 
-if __name__ == '__main__':
+def main():
+    os.chdir(os.path.dirname(__file__))
     app = PyGraphr()
     app.run()
+
+if __name__ == '__main__':
+    main()
