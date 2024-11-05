@@ -110,7 +110,7 @@ class GUIManager:
 
         # Info toggle heuristics table
         self.heuristics_table_info_label = pygame_gui.elements.UILabel(
-            relative_rect=pygame.Rect((5, 50), (300, 30)),
+            relative_rect=pygame.Rect((10, 50), (210, 30)),
             text="Click 'H' key to toggle heuristics table",
             manager=self.manager,
             object_id=ObjectID(class_id=None, object_id='#normal-label')
@@ -124,11 +124,9 @@ class GUIManager:
             if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
 
                 if event.ui_element == self.begin_button:
-                    selected_algorithm = self.algorithm_dropdown.selected_option
+                    selected_algorithm = self.algorithm_dropdown.selected_option[0]
                     print("[ALGO] Begin search for search algorithm:", selected_algorithm)
-                    self.visit_order, self.found_path = self.algorithms.perform_search(selected_algorithm,
-                                                                                       self.graph.start_node,
-                                                                                       self.graph.end_node)
+                    self.visit_order, self.found_path = self.algorithms.perform_search(selected_algorithm, self.graph.start_node, self.graph.end_node)
 
                 elif event.ui_element == self.reset_button:
                     print("[ALGO] Graph search reset!")
@@ -177,7 +175,7 @@ class GUIManager:
             p2 = np.array(self.nodes[edge[1]].pos, dtype=float)
 
             # Normalize the direction
-            direction = p2 - p1
+            direction = (p2 - p1).tolist()
             direction /= np.linalg.norm(direction)
 
             # Perpendicular vector
@@ -190,7 +188,7 @@ class GUIManager:
             left = p2_arrow - arrow_size * (direction * 0.5 + perp_vector * 0.7)
             right = p2_arrow - arrow_size * (direction * 0.5 - perp_vector * 0.7)
 
-            pygame.draw.line(self.screen, Color.BLACK.value, p1, p2_arrow, 2)
+            pygame.draw.line(self.screen, Color.BLACK.value, p1.tolist(), p2_arrow, 2)
             pygame.draw.line(self.screen, Color.BLACK.value, p2_arrow, left, 2)
             pygame.draw.line(self.screen, Color.BLACK.value, p2_arrow, right, 2)
 
@@ -205,8 +203,7 @@ class GUIManager:
             weight_text = font.render(str(edge_weight), True, Color.BLACK.value)
             # Create a new surface with dimensions expanded by padding
             bg_padding = 3
-            padded_surface = pygame.Surface((weight_text.get_width() + 2 * bg_padding,
-                                             weight_text.get_height() + 2 * bg_padding))
+            padded_surface = pygame.Surface((weight_text.get_width() + 2 * bg_padding, weight_text.get_height() + 2 * bg_padding))
             padded_surface.fill(Color.WHITE.value)
             padded_surface.blit(weight_text, (bg_padding, bg_padding))
             # Compute the midpoint for the padded surface

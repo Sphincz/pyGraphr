@@ -266,3 +266,5 @@ pyrightconfig.json
 # Custom
 src/solutions.py
 src/algorithms.py
+src/graphs/graph_tests.txt
+/src/tests/

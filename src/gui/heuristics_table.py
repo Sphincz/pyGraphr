@@ -18,7 +18,7 @@ class HeuristicsTable:
 
         # Header
         pygame.draw.rect(screen, Color.WHITE.value, (x, y, rect_width, rect_height))
-        screen.blit(pygame.font.SysFont("Tahoma", 13, bold=True).render("Heuristics", True, Color.BLACK.value), (x + 5, y + 10))
+        screen.blit(pygame.font.SysFont("Tahoma", 13, bold=True).render("Heuristics", True, Color.BLACK.value), (x + 3, y + 10))
 
         # Display each node and its heuristic
         for idx, node in enumerate(self.graph.nodes.values()):
